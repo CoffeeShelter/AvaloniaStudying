@@ -1,13 +1,21 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using ReactiveUI;
+using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
 
 namespace AvaloniaStudying01.ViewModels
 {
     public partial class SidebarMenuViewModel : ObservableObject
     {
+        public SidebarMenuViewModel()
+        {
+            SelectedListItem = Items.First(vm => vm.ModelType == typeof(HomePageViewModel));
+        }
+
+
         [ObservableProperty]
         private bool _isPaneOpen = true;
 
@@ -24,12 +32,12 @@ namespace AvaloniaStudying01.ViewModels
             if (instance == null) return;
             CurrentPage = (ObservableObject)instance;
         }
-
-        public ObservableCollection<ListItemTemplate> Items { get; } = new()
-        {
+         
+        public ObservableCollection<ListItemTemplate> Items { get; } =
+        [
             new ListItemTemplate(typeof(HomePageViewModel)),
             new ListItemTemplate(typeof(ButtonPageViewModel)),
-        };
+        ];
 
         [RelayCommand]
         private void TriggerPane()
