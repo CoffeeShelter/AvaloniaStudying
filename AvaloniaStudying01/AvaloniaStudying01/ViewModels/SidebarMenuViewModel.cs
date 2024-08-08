@@ -1,4 +1,7 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Media;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using System;
@@ -35,8 +38,8 @@ namespace AvaloniaStudying01.ViewModels
          
         public ObservableCollection<ListItemTemplate> Items { get; } =
         [
-            new ListItemTemplate(typeof(HomePageViewModel)),
-            new ListItemTemplate(typeof(ButtonPageViewModel)),
+            new ListItemTemplate(typeof(HomePageViewModel), "HomeRegular"),
+            new ListItemTemplate(typeof(ButtonPageViewModel), "CursorHoverRegular"),
         ];
 
         [RelayCommand]
@@ -48,13 +51,17 @@ namespace AvaloniaStudying01.ViewModels
 
     public class ListItemTemplate
     {
-        public ListItemTemplate(Type type)
+        public ListItemTemplate(Type type, string iconKey)
         {
             ModelType = type;
             Label = type.Name.Replace("PageViewModel", "");
+
+            Application.Current!.TryFindResource(iconKey, out var res);
+            ListItemIcon = (StreamGeometry)res!;
         }
 
         public string Label { get; }
         public Type ModelType { get; }
+        public StreamGeometry ListItemIcon { get; }
     }
 }
