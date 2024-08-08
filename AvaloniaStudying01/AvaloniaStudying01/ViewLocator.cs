@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using AvaloniaStudying01.ViewModels;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 
 namespace AvaloniaStudying01
@@ -28,7 +29,7 @@ namespace AvaloniaStudying01
 
         public bool Match(object? data)
         {
-            return data is ViewModelBase;
+            return data is ViewModelBase or ObservableObject;
         }
     }
 }
