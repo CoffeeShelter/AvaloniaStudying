@@ -40,6 +40,7 @@ namespace AvaloniaStudying01.ViewModels
         [
             new ListItemTemplate(typeof(HomePageViewModel), "HomeRegular"),
             new ListItemTemplate(typeof(ButtonPageViewModel), "CursorHoverRegular"),
+            new ListItemTemplate(typeof(ImagePageViewModel), "CursorHoverRegular"),
         ];
 
         [RelayCommand]
